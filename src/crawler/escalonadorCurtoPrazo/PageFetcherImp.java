@@ -1,40 +1,46 @@
 package crawler.escalonadorCurtoPrazo;
 
-import com.trigonic.jrobotx.Record;
+import com.trigonic.jrobotx.util.URLEncodeTokenizer;
 import crawler.ColetorUtil;
 import crawler.URLAddress;
 
-import java.net.MalformedURLException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
 
 public class PageFetcherImp implements PageFetcher{
-    private EscalonadorSimples escalonadorSimples = new EscalonadorSimples();
+    private EscalonadorSimples escalonadorSimples;
+
+    public PageFetcherImp(EscalonadorSimples escalonadorSimples) {
+        this.escalonadorSimples = escalonadorSimples;
+    }
 
     @Override
     public void run() {
-        try {
-            URLAddress urlAddressEduardo = new URLAddress("www.casasbahia.com.br/robots.txt", 1);
-            URLAddress urlAddressVictor = new URLAddress("www.bloomberg.com/robots.txt", 1);
-            URLAddress urlLoraine = new URLAddress("www.casasbahia.com.br/robots.txt", 1);
-            URLAddress urlVinicios = new URLAddress("economictimes.indiatimes.com/robots.txt", 1);
+        System.out.println("start");
 
-            escalonadorSimples.adicionaNovaPagina(urlAddressEduardo);
-            escalonadorSimples.adicionaNovaPagina(urlAddressVictor);
-            escalonadorSimples.adicionaNovaPagina(urlLoraine);
-            escalonadorSimples.adicionaNovaPagina(urlVinicios);
-
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-
-        while(escalonadorSimples.finalizouColeta()) {
+        while(!escalonadorSimples.finalizouColeta()) {
             URLAddress urlFile = escalonadorSimples.getURL();
 
-            Record record = escalonadorSimples.getRecordAllowRobots(urlFile);
-            escalonadorSimples.putRecorded(urlFile.getDomain(), record);
+            if (ColetorUtil.isAbsoluteURL(urlFile.getAddress())) {
+                System.out.println(urlFile.getAddress());
 
-            if (record != null) {
-                
+                try {
+                    InputStream inputStream = ColetorUtil.getUrlStream("", new URL(urlFile.getAddress()));
+                    String result = ColetorUtil.consumeStream(inputStream);
+
+                    decodeUrl(result);
+                } catch (IOException e) {
+
+                }
             }
+        }
+    }
+
+    private void decodeUrl(String encoded) {
+        URLEncodeTokenizer urlEncodeTokenizer = new URLEncodeTokenizer(encoded, "Sitemap");
+        while (urlEncodeTokenizer.hasNext()) {
+            URLEncodeTokenizer.Token token = urlEncodeTokenizer.next();
         }
     }
 }

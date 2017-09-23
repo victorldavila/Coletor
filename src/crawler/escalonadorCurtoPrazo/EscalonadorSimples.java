@@ -25,26 +25,26 @@ public class EscalonadorSimples implements Escalonador{
 	private static int limDepth = 10;
 	private int pageCount = 0;
 	
-	Record rEduardo;
-    Record rLoraine;
-    Record rVictor;
-    Record rVinicius;
-	
 	Servidor server;
-	RobotExclusion robotExlusion = new RobotExclusion();
-	
+
 	public EscalonadorSimples() {
 		fila = new LinkedHashMap();
 		mapRobots = new HashMap<>();
 		pagVisitada = new HashSet<>();
 
 		try {
-			rEduardo = robotExlusion.get((new URLAddress("www.casasbahia.com.br/robots.txt", 1)),"daniBoot");
-		    rLoraine = robotExlusion.get((new URLAddress("www.casasbahia.com.br/robots.txt", 1)), "daniBoot");
-		    rVictor = robotExlusion.get((new URLAddress("www.bloomberg.com/robots.txt", 1)), "daniBoot");
-		    rVinicius = robotExlusion.get((new URLAddress("economictimes.indiatimes.com/robots.txt", 1)), "daniBoot");
-		} catch(MalformedURLException e) {
-			
+			URLAddress urlAddressEduardo = new URLAddress("www.casasbahia.com.br/robots.txt", 1);
+			URLAddress urlAddressVictor = new URLAddress("www.bloomberg.com/robots.txt", 1);
+			URLAddress urlLoraine = new URLAddress("www.casasbahia.com.br/robots.txt", 1);
+			URLAddress urlVinicios = new URLAddress("economictimes.indiatimes.com/robots.txt", 1);
+
+			adicionaNovaPagina(urlAddressEduardo);
+			adicionaNovaPagina(urlAddressVictor);
+			adicionaNovaPagina(urlLoraine);
+			adicionaNovaPagina(urlVinicios);
+
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
 		}
 	}
 
