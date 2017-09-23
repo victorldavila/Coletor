@@ -1,5 +1,7 @@
 package crawler.escalonadorCurtoPrazo;
 
+import com.trigonic.jrobotx.Record;
+import crawler.ColetorUtil;
 import crawler.URLAddress;
 
 import java.net.MalformedURLException;
@@ -27,6 +29,12 @@ public class PageFetcherImp implements PageFetcher{
         while(escalonadorSimples.finalizouColeta()) {
             URLAddress urlFile = escalonadorSimples.getURL();
 
+            Record record = escalonadorSimples.getRecordAllowRobots(urlFile);
+            escalonadorSimples.putRecorded(urlFile.getDomain(), record);
+
+            if (record != null) {
+                
+            }
         }
     }
 }

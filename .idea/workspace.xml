@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2166a620-d9bb-4658-8417-3952eecf4d30" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/PageFetcherImp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Coletor/crawler/Servidor.class" afterPath="$PROJECT_DIR$/out/production/Coletor/crawler/Servidor.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Coletor/crawler/escalonadorCurtoPrazo/EscalonadorSimples.class" afterPath="$PROJECT_DIR$/out/production/Coletor/crawler/escalonadorCurtoPrazo/EscalonadorSimples.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/Coletor/crawler/test/EscalonadorSimplesTeste.class" afterPath="$PROJECT_DIR$/out/production/Coletor/crawler/test/EscalonadorSimplesTeste.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crawler/Servidor.java" afterPath="$PROJECT_DIR$/src/crawler/Servidor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/EscalonadorSimples.java" afterPath="$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/EscalonadorSimples.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crawler/test/EscalonadorSimplesTeste.java" afterPath="$PROJECT_DIR$/src/crawler/test/EscalonadorSimplesTeste.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/PageFetcherImp.java" afterPath="$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/PageFetcherImp.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,10 +14,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="EscalonadorSimplesTeste.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EscalonadorSimplesTeste.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/crawler/test/EscalonadorSimplesTeste.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="54">
+            <state relative-caret-position="-162">
               <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -43,11 +36,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageFetcherImp.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="PageFetcherImp.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/PageFetcherImp.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
-              <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+            <state relative-caret-position="358">
+              <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,7 +51,7 @@
       <file leaf-file-name="EscalonadorSimples.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/EscalonadorSimples.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1078">
+            <state relative-caret-position="164">
               <caret line="44" column="77" lean-forward="true" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
               <folding />
             </state>
@@ -642,10 +635,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/PageFetcherImp.java">
+    <entry file="file://$PROJECT_DIR$/src/crawler/test/EscalonadorSimplesTeste.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="28" column="0" lean-forward="false" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
+        <state relative-caret-position="-162">
+          <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -654,16 +647,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/EscalonadorSimples.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1078">
+        <state relative-caret-position="164">
           <caret line="44" column="77" lean-forward="true" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/crawler/test/EscalonadorSimplesTeste.java">
+    <entry file="file://$PROJECT_DIR$/src/crawler/escalonadorCurtoPrazo/PageFetcherImp.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="54">
-          <caret line="36" column="41" lean-forward="false" selection-start-line="36" selection-start-column="41" selection-end-line="36" selection-end-column="41" />
+        <state relative-caret-position="358">
+          <caret line="35" column="16" lean-forward="false" selection-start-line="35" selection-start-column="16" selection-end-line="35" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
