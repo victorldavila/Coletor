@@ -54,30 +54,22 @@ public class EscalonadorSimplesTeste {
 		e.adicionaNovaPagina(urlUOL1);
 		e.adicionaNovaPagina(urlUOL2);
 		e.adicionaNovaPagina(urlGlobo);
-		
-		System.out.println("antes da ordem");
-		
+
 		//testa a ordem dos elementos
 		u1 = e.getURL();
 		u2 = e.getURL();
 		u3 = e.getURL();
-		System.out.println("depois da ordem");
+
 		URLAddress[] ordemEsperada = {urlTerra,urlUOL1,urlGlobo};
 		URLAddress[] ordemFeita = {urlTerra,urlUOL1,urlGlobo};
 		
-		System.out.println("to perto ");
-		
 		//o primeiro nao pode ser urlProf (profundidade infinita)
 		assertNotSame("A URL '"+urlProf+"' deveria ser desconsiderada pois possui profundidade muito alta",urlProf,u1);
-		
-		System.out.println("começo do for ");
 		
 		//verifica se está na ordem correta (os tres primeiros)
 		for(int i = 0; i<ordemEsperada.length ; i++){
 			assertSame("o end. "+ordemEsperada[i]+" deveria ser o "+i+"º a sair (e deve ser o MESMO objeto)",
 					ordemEsperada[i],ordemFeita[i]);
-			
-			System.out.println("dentro do for ");
 		}
 		
 		
@@ -94,9 +86,6 @@ public class EscalonadorSimplesTeste {
 		
 		//testa a espera para pegar o u4 (uol)		
 		assertTrue("O tempo de espera entre duas requisições do mesmo servidor não foi maior que "+Servidor.ACESSO_MILIS,(timeSecondHitUOL-timeFirstHitUOL)>Servidor.ACESSO_MILIS);
-		
-		
-		
 	}
 
 }

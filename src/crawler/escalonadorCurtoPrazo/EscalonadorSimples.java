@@ -19,8 +19,9 @@ import crawler.URLAddress;
 public class EscalonadorSimples implements Escalonador{
 
 	private LinkedHashMap<Servidor, List<URLAddress>> fila ;
+
 	private Map<String, Record> mapRobots;
-	private Set<URLAddress> pagVisitada;
+	private Set<String> pagVisitada;
 	private static int limDepth = 10;
 	private int pageCount = 0;
 	
@@ -51,19 +52,21 @@ public class EscalonadorSimples implements Escalonador{
 	public synchronized URLAddress getURL() {
 		while(!this.finalizouColeta()){
 			for(Servidor s : fila.keySet()){
-				System.out.println("to vivo for");
+
 				List<URLAddress> filaDoServidor = fila.get(s);
-				if((!fila.isEmpty() )&& (server.isAccessible())){
+				if((!fila.isEmpty() )&& (s.isAccessible())){
+					if (filaDoServidor.isEmpty())
+						continue;
+
 					URLAddress element = filaDoServidor.remove(0);
-					server.acessadoAgora();
-					System.out.println("to vivo");
+					s.acessadoAgora();
+
 					return element;
 					
 				} else
 					try {
 						this.wait(1000L);
-					} catch (InterruptedException e) {
-					}
+					} catch (InterruptedException e) { }
 			}
 		}
 		return null;
@@ -71,8 +74,7 @@ public class EscalonadorSimples implements Escalonador{
 
 	@Override
 	public boolean adicionaNovaPagina(URLAddress urlAdd) {
-		
-		if(pagVisitada.contains(urlAdd) || (urlAdd.getDepth() > limDepth)){
+		if(pagVisitada.contains(urlAdd.getAddress()) || (urlAdd.getDepth() > limDepth)){
 			return false;
 		} else {
 			System.out.println("Nao contem pagina");
@@ -81,30 +83,30 @@ public class EscalonadorSimples implements Escalonador{
 				System.out.println("pega server");
 				List lista = fila.get(server);
 				lista.add(urlAdd);
-				pagVisitada.add(urlAdd);
+				pagVisitada.add(urlAdd.getAddress());
 			
 				return true;
 			} else {
 				List lista = new ArrayList<>();
+				lista.add(urlAdd);
+				pagVisitada.add(urlAdd.getAddress());
 				fila.put(server, lista);
+
+				return true;
 			}
 		}
-		return false;
-	
 	}
 
 
 	@Override
 	public Record getRecordAllowRobots(URLAddress url) {
-		
 		Record record = mapRobots.get(url.getDomain());
 		return record;
 	}
 
 	@Override
 	public void putRecorded(String domain, Record domainRec) {
-			
-		if(domainRec != null){
+		if(domainRec != null) {
 			mapRobots.put(domain, domainRec);
 		}
 	

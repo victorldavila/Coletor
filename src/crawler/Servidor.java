@@ -7,8 +7,7 @@ public class Servidor {
 	private String nome;
 	private long lastAccess;
 	
-	public Servidor(String nome)
-	{
+	public Servidor(String nome) {
 		this.nome = nome;
 		this.lastAccess =0;
 	}
@@ -19,18 +18,15 @@ public class Servidor {
 	 * 
 	 * @return
 	 */
-	public long getTimeSinceLastAcess()
-	{
-		long time = System.currentTimeMillis()- this.lastAccess;
-		return time; //retorna milisegundos desde o ultimo acesso ao servidor 
+	public long getTimeSinceLastAcess() {
+		return System.currentTimeMillis()- this.lastAccess;
 	}
 	
 	/**
 	 * 
 	 * Atualiza o acesso
 	 */
-	public void acessadoAgora()
-	{
+	public void acessadoAgora() {
 		this.lastAccess = System.currentTimeMillis();//coloca a data atual pegada pelo java 
 	}
 	
@@ -38,15 +34,8 @@ public class Servidor {
 	 * Verifica se é possivel acessar o dominio
 	 * @return
 	 */
-	public synchronized boolean isAccessible()
-	{
-		long timesince = getTimeSinceLastAcess();
-		if (timesince > ACESSO_MILIS)
-		{
-			return true;
-		}
-		else
-			return false;
+	public synchronized boolean isAccessible() {
+		return getTimeSinceLastAcess() > ACESSO_MILIS ? true : false;
 	}
 	
 	public long getLastAcess()
