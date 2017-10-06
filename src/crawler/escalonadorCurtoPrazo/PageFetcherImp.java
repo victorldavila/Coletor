@@ -7,6 +7,7 @@ import org.htmlcleaner.*;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 public class PageFetcherImp implements PageFetcher{
@@ -22,29 +23,27 @@ public class PageFetcherImp implements PageFetcher{
 
         while(!escalonadorSimples.finalizouColeta()) {
             URLAddress urlFile = escalonadorSimples.getURL();
-
+            System.out.println(urlFile);
             if (ColetorUtil.isAbsoluteURL(urlFile.getAddress())) {
-                System.out.println(urlFile.getAddress());
-
                 try {
                     InputStream inputStream = ColetorUtil.getUrlStream("Bot",
                             new URL(urlFile.getAddress()));
-                    String result = ColetorUtil.consumeStream(inputStream);
 
-                    decodeUrl(result);
-                } catch (IOException e) {
+                    decodeUrl(inputStream, urlFile.getAddress());
+                } catch (IOException e1) {
+
+                } catch (IllegalArgumentException e2) {
 
                 }
             }
         }
+
+        System.out.println("\nEnd");
     }
 
-    private void decodeUrl(String encoded) throws IOException {
-        System.out.println(encoded);
+    private void decodeUrl(InputStream inputStream, String domain) throws IOException {
         HtmlCleaner cleaner = new HtmlCleaner();
-        final String siteUrl = "http://www.themoscowtimes.com/";
-
-        TagNode node = cleaner.clean(new URL(siteUrl));
+        TagNode node = cleaner.clean(inputStream);
 
         // traverse whole DOM and update images to absolute URLs
         node.traverse(new TagNodeVisitor() {
@@ -54,8 +53,12 @@ public class PageFetcherImp implements PageFetcher{
                     String tagName = tag.getName();
                     if ("a".equals(tagName)) {
                         String href = tag.getAttributeByName("href");
-                        System.out.println(href);
                         if (href != null) {
+                            try {
+                                escalonadorSimples.adicionaNovaPagina(new URLAddress(href, 1));
+                            } catch (MalformedURLException e) {
+
+                            }
                             //tag.setAttribute("href", Utils.fullUrl(siteUrl, src));
                         }
                     }
@@ -70,6 +73,6 @@ public class PageFetcherImp implements PageFetcher{
 
         SimpleHtmlSerializer serializer =
                 new SimpleHtmlSerializer(cleaner.getProperties());
-        serializer.writeToFile(node, "themoscowtimes.txt");
+        serializer.writeToFile(node, domain);
     }
 }

@@ -16,8 +16,7 @@ public class URLAddress {
 	}
 	public static String formatURL(String url)
 	{
-		if(!url.matches("[a-zA-Z]+://.*"))
-		{
+		if(!url.matches("[a-zA-Z]+://.*")) {
 			url = "http://"+url;
 		}
 		

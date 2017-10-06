@@ -75,12 +75,13 @@ public class EscalonadorSimples implements Escalonador{
 	@Override
 	public boolean adicionaNovaPagina(URLAddress urlAdd) {
 		if(pagVisitada.contains(urlAdd.getAddress()) || (urlAdd.getDepth() > limDepth)){
+			//System.out.println("Ja visitada ou limDeph maior");
 			return false;
 		} else {
-			System.out.println("Nao contem pagina");
+			//System.out.println("Nao contem pagina");
 			server = new Servidor(urlAdd.getDomain());
 			if(fila.containsKey(server)){
-				System.out.println("pega server");
+				//System.out.println("pega server");
 				List lista = fila.get(server);
 				lista.add(urlAdd);
 				pagVisitada.add(urlAdd.getAddress());
