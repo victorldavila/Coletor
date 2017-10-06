@@ -19,12 +19,13 @@ public class PageFetcherImp implements PageFetcher{
 
     @Override
     public void run() {
-        System.out.println("\nstart\n");
+        //System.out.println("\nstart\n");
 
         while(!escalonadorSimples.finalizouColeta()) {
             URLAddress urlFile = escalonadorSimples.getURL();
-            System.out.println(urlFile);
+            //System.out.println(urlFile);
             if (ColetorUtil.isAbsoluteURL(urlFile.getAddress())) {
+                escalonadorSimples.countFetchedPage();
                 try {
                     InputStream inputStream = ColetorUtil.getUrlStream("Bot",
                             new URL(urlFile.getAddress()));
@@ -38,7 +39,7 @@ public class PageFetcherImp implements PageFetcher{
             }
         }
 
-        System.out.println("\nEnd");
+        //System.out.println("\nEnd");
     }
 
     private void decodeUrl(InputStream inputStream, String domain) throws IOException {

@@ -9,6 +9,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.trigonic.jrobotx.Record;
 import com.trigonic.jrobotx.RobotExclusion;
@@ -18,7 +19,7 @@ import crawler.URLAddress;
 
 public class EscalonadorSimples implements Escalonador{
 
-	private LinkedHashMap<Servidor, List<URLAddress>> fila ;
+	private ConcurrentHashMap<Servidor, List<URLAddress>> fila ;
 
 	private Map<String, Record> mapRobots;
 	private Set<String> pagVisitada;
@@ -28,7 +29,7 @@ public class EscalonadorSimples implements Escalonador{
 	Servidor server;
 
 	public EscalonadorSimples() {
-		fila = new LinkedHashMap();
+		fila = new ConcurrentHashMap();
 		mapRobots = new HashMap<>();
 		pagVisitada = new HashSet<>();
 
@@ -126,10 +127,10 @@ public class EscalonadorSimples implements Escalonador{
 
 	@Override
 	public void countFetchedPage() {
-		// TODO Auto-generated method stub
-		
 		this.pageCount++;
 	}
 
-	
+	public int getPageCount() {
+		return pageCount;
+	}
 }
