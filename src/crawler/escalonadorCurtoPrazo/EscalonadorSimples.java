@@ -33,10 +33,10 @@ public class EscalonadorSimples implements Escalonador{
 		pagVisitada = new HashSet<>();
 
 		try {
-			URLAddress urlAddressEduardo = new URLAddress("www.casasbahia.com.br/robots.txt", 1);
-			URLAddress urlAddressVictor = new URLAddress("www.bloomberg.com/robots.txt", 1);
-			URLAddress urlLoraine = new URLAddress("www.casasbahia.com.br/robots.txt", 1);
-			URLAddress urlVinicios = new URLAddress("economictimes.indiatimes.com/robots.txt", 1);
+			URLAddress urlAddressEduardo = new URLAddress("www.casasbahia.com.br", 1);
+			URLAddress urlAddressVictor = new URLAddress("www.bloomberg.com", 1);
+			URLAddress urlLoraine = new URLAddress("www.casasbahia.com.br", 1);
+			URLAddress urlVinicios = new URLAddress("economictimes.indiatimes.com", 1);
 
 			adicionaNovaPagina(urlAddressEduardo);
 			adicionaNovaPagina(urlAddressVictor);
