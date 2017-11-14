@@ -25,6 +25,8 @@ public class EscalonadorSimples implements Escalonador{
 	private Set<String> pagVisitada;
 	private static int limDepth = 10;
 	private int pageCount = 0;
+
+	private int saveHtmlFile = 1;
 	
 	Servidor server;
 
@@ -47,6 +49,16 @@ public class EscalonadorSimples implements Escalonador{
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public EscalonadorSimples(String seed) throws MalformedURLException {
+		fila = new ConcurrentHashMap();
+		mapRobots = new HashMap<>();
+		pagVisitada = new HashSet<>();
+
+		URLAddress urlAddressVictor = new URLAddress(seed, 1);
+
+		adicionaNovaPagina(urlAddressVictor);;
 	}
 
 	@Override
@@ -132,5 +144,13 @@ public class EscalonadorSimples implements Escalonador{
 
 	public int getPageCount() {
 		return pageCount;
+	}
+
+	public int getSaveHtmlFile() {
+		return saveHtmlFile;
+	}
+
+	public void countSaveHtmlFile() {
+		this.saveHtmlFile++;
 	}
 }

@@ -3,8 +3,14 @@ package crawler.escalonadorCurtoPrazo;
 import com.trigonic.jrobotx.util.URLEncodeTokenizer;
 import crawler.ColetorUtil;
 import crawler.URLAddress;
+import org.apache.commons.io.FileUtils;
 import org.htmlcleaner.*;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
@@ -19,61 +25,40 @@ public class PageFetcherImp implements PageFetcher{
 
     @Override
     public void run() {
-        //System.out.println("\nstart\n");
-
         while(!escalonadorSimples.finalizouColeta()) {
             URLAddress urlFile = escalonadorSimples.getURL();
-            //System.out.println(urlFile);
+
             if (ColetorUtil.isAbsoluteURL(urlFile.getAddress())) {
                 escalonadorSimples.countFetchedPage();
+
+                System.out.println(urlFile.getAddress());
+
                 try {
-                    InputStream inputStream = ColetorUtil.getUrlStream("Bot",
-                            new URL(urlFile.getAddress()));
-
-                    decodeUrl(inputStream, urlFile.getAddress());
+                    decodeUrl("Bot", urlFile.getAddress());
                 } catch (IOException e1) {
-
-                } catch (IllegalArgumentException e2) {
 
                 }
             }
         }
-
-        //System.out.println("\nEnd");
     }
 
-    private void decodeUrl(InputStream inputStream, String domain) throws IOException {
-        HtmlCleaner cleaner = new HtmlCleaner();
-        TagNode node = cleaner.clean(inputStream);
+    private void decodeUrl(String userAgent, String domain) throws IOException {
+        Document html = Jsoup.connect(domain).userAgent(userAgent).get();
+        Elements links = html.select("a[href]");
 
-        // traverse whole DOM and update images to absolute URLs
-        node.traverse(new TagNodeVisitor() {
-            public boolean visit(TagNode tagNode, HtmlNode htmlNode) {
-                if (htmlNode instanceof TagNode) {
-                    TagNode tag = (TagNode) htmlNode;
-                    String tagName = tag.getName();
-                    if ("a".equals(tagName)) {
-                        String href = tag.getAttributeByName("href");
-                        if (href != null) {
-                            try {
-                                escalonadorSimples.adicionaNovaPagina(new URLAddress(href, 1));
-                            } catch (MalformedURLException e) {
+        for (Element link : links) {
+            escalonadorSimples.adicionaNovaPagina(new URLAddress(link.attr("abs:href"), 1));
+        }
 
-                            }
-                            //tag.setAttribute("href", Utils.fullUrl(siteUrl, src));
-                        }
-                    }
-                } else if (htmlNode instanceof CommentNode) {
-                    CommentNode comment = ((CommentNode) htmlNode);
-                    //comment.getContent().append(" -- By HtmlCleaner");
-                }
-                // tells visitor to continue traversing the DOM tree
-                return true;
-            }
-        });
+        writeToFile(html);
+    }
 
-        SimpleHtmlSerializer serializer =
-                new SimpleHtmlSerializer(cleaner.getProperties());
-        serializer.writeToFile(node, domain);
+    public synchronized void writeToFile(Document html) throws IOException {
+        final File f = new File("C:/Users/victo/IdeaProjects/Coletor/coleta/" + String.valueOf(escalonadorSimples.getSaveHtmlFile()) + ".html");
+        FileUtils.writeStringToFile(f, html.outerHtml(), "UTF-8");
+
+        //System.out.println("Save file numero: " + escalonadorSimples.getSaveHtmlFile());
+
+        escalonadorSimples.countSaveHtmlFile();
     }
 }

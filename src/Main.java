@@ -1,6 +1,8 @@
 import crawler.escalonadorCurtoPrazo.EscalonadorSimples;
 import crawler.escalonadorCurtoPrazo.PageFetcherImp;
 
+import java.net.MalformedURLException;
+
 public class Main {
     private static final int THREAD_20 = 20;
     private static final int THREAD_40 = 40;
@@ -11,7 +13,7 @@ public class Main {
     private static long startTime;
     private static long endTime;
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, MalformedURLException {
         startTime = System.currentTimeMillis();
 
         EscalonadorSimples escalonadorSimples = new EscalonadorSimples();
