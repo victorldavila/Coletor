@@ -58,7 +58,7 @@ public class EscalonadorSimples implements Escalonador{
 
 		URLAddress urlAddressVictor = new URLAddress(seed, 1);
 
-		adicionaNovaPagina(urlAddressVictor);;
+		adicionaNovaPagina(urlAddressVictor);
 	}
 
 	@Override
